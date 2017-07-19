@@ -17,13 +17,32 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
     console.log('usuario conectado');
 
+        socket.emit('newMensaje', {
+            de: 'Admin',
+            texto: 'Bienvenido al chat room',
+            creadoEl: new Date().getTime()
+        });
+
+        socket.broadcast.emit('newMensaje', {
+            de: 'Admin',
+            texto: 'Nuevo usuario unido',
+            creadoEl: new Date().getTime()
+        });
+
     socket.on('crearMensaje', ( msj ) => {
         console.log('Mensaje: ', msj);
+        
         io.emit('newMensaje', {
             de : msj.de,
             texto: msj.texto,
             creadoEl: new Date().getTime()
         });
+
+        // socket.broadcast('newMensaje', {
+        //     de : msj.de,
+        //     texto: msj.texto,
+        //     creadoEl: new Date().getTime()
+        // });
     });
 
     socket.on('disconnect', () => {

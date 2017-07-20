@@ -2,8 +2,16 @@ var generarMensaje = ( from, texto ) => {
     return {
         from,
         texto,
-        completedAt : new Date().getTime()
+        creadoEl : new Date().getTime()
     };
 };
 
-module.exports = { generarMensaje };
+var generarLocationMensaje = ( from, latitud, longitud ) => {
+    return {
+        from,
+        url: `https://www.google.com.mx/maps?=${latitud},${longitud}`,
+        creadoEl : new Date().getTime()        
+    };
+};
+
+module.exports = { generarMensaje, generarLocationMensaje };

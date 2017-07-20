@@ -23,11 +23,11 @@ io.on('connection', (socket) => {
 
     socket.broadcast.emit('newMensaje', generarMensaje('Admin','Nuevo usuario conectado'));
 
-    socket.on('crearMensaje', ( msj ) => {
+    socket.on('crearMensaje', ( msj, callback ) => {
         console.log('Mensaje: ', msj);
         
-        io.emit('newMensaje', generarMensaje(msj.de, msj.texto));
-
+        io.emit('newMensaje', generarMensaje(msj.from, msj.texto));
+        callback('Esto viene del servidor');
     });
 
     socket.on('disconnect', () => {

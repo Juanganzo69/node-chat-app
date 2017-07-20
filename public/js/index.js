@@ -28,11 +28,13 @@ socket.on('newLocationMensaje', function (msg) {
 jQuery('#mensaje-form').on('submit', function (e) {
     e.preventDefault();
 
+    var mensajeTextbox = jQuery('[name=mensaje]');
+
     socket.emit('crearMensaje', {
         from: 'Usuario',
-        texto: jQuery('[name=mensaje]').val()
+        texto: mensajeTextbox.val()
     }, function () {
-
+        mensajeTextbox.val('');
     });
 });
 
@@ -41,13 +43,17 @@ locationBotton.on('click', function () {
     if (!navigator.geolocation) {
         return alert('Geolocalización no soportada en tu navegador.');
     }
+    
+    locationBotton.attr('disabled','disabled').text('enviando localización...');
 
     navigator.geolocation.getCurrentPosition(function (position) {
+        locationBotton.removeAttr('disabled').text('Enviar localización');
         socket.emit('crearLocationMensaje', {
             latitud: position.coords.latitude,
             longitud: position.coords.longitude
         });
     }, function (err) {
         alert('Desactivado para buscar tu localización');
+        locationBotton.removeAttr('disabled').text('Enviar localización');      
     });
 });

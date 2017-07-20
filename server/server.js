@@ -2,6 +2,7 @@ const path = require('path');
 const http  = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
+const { generarMensaje } = require('./utils/mensaje');
 var port = process.env.PORT || 3000;
 
 const publicPath = path.join(__dirname, '../public');
@@ -15,34 +16,18 @@ var io = socketIO(server);
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
+    
     console.log('usuario conectado');
 
-        socket.emit('newMensaje', {
-            de: 'Admin',
-            texto: 'Bienvenido al chat room',
-            creadoEl: new Date().getTime()
-        });
+    socket.emit('newMensaje', generarMensaje('Admin', 'Bienvenidos al chat room'));
 
-        socket.broadcast.emit('newMensaje', {
-            de: 'Admin',
-            texto: 'Nuevo usuario unido',
-            creadoEl: new Date().getTime()
-        });
+    socket.broadcast.emit('newMensaje', generarMensaje('Admin','Nuevo usuario conectado'));
 
     socket.on('crearMensaje', ( msj ) => {
         console.log('Mensaje: ', msj);
         
-        io.emit('newMensaje', {
-            de : msj.de,
-            texto: msj.texto,
-            creadoEl: new Date().getTime()
-        });
+        io.emit('newMensaje', generarMensaje(msj.de, msj.texto));
 
-        // socket.broadcast('newMensaje', {
-        //     de : msj.de,
-        //     texto: msj.texto,
-        //     creadoEl: new Date().getTime()
-        // });
     });
 
     socket.on('disconnect', () => {

@@ -22,10 +22,36 @@
         <button id="send-location">Enviar localización</button>
         </div>
     </div>
-    
+
+    <script id="mensaje-template" type="text/template">
+        <li class="message">
+            <div class="message__title">
+                <h4>{{from}}</h4>
+                <span>{{creadoEl}}</span>
+            </div>
+            <div class="message__body">
+               <p>{{texto}}</p>
+            </div>
+        </li>
+    </script>
+    <script id="location-mensaje-template" type="text/template">
+        <li class="message">
+            <div class="message__title">
+                <h4>{{from}}</h4>
+                <span>{{creadoEl}}</span>
+            </div>
+            <div class="message__body">
+                <p>
+                    <a href="{{url}}" target="_blank">Mi localización :)</a>
+                </p>
+            </div>
+        </li>
+    </script>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/libs/jquery.min.js"></script>
     <script src="/js/libs/moment.js"></script>
+    <script src="/js/libs/mustache.js"></script>
     <script src="/js/index.js"></script>
 </body>
 </html>

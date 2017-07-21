@@ -11,7 +11,7 @@ var generarMensaje = ( from, texto ) => {
 var generarLocationMensaje = ( from, latitud, longitud ) => {
     return {
         from,
-        url: `https://www.google.com.mx/maps?=${latitud},${longitud}`,
+        url: `https://www.google.com.mx/maps?q=${latitud},${longitud}`,
         creadoEl : moment().valueOf()        
     };
 };

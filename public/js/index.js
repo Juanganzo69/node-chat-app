@@ -10,16 +10,18 @@ socket.on('disconnect', function () {
 });
 
 socket.on('newMensaje', function (newMsg) {
-    console.log('Mensaje: ', newMsg);
+    var formatoTiempo = moment(newMsg.creadoEl).format('h:mm a');
+
     var li = jQuery('<li></li>');
-    li.text(newMsg.from + ' : ' + newMsg.texto);
+    li.text(newMsg.from + ' ' + formatoTiempo + ' : ' + newMsg.texto);
     jQuery('#mensajes').append(li);
 });
 
 socket.on('newLocationMensaje', function (msg) {
+    var formatTime = moment(msg.creadoEl).format('h:mm a');
     var li = jQuery('<li></li>');
     var a = jQuery('<a target="_blank">My localización actual</a>');
-    li.text(msg.from+' : ');
+    li.text(msg.from +' '+ formatTime + ' : ');
     a.attr('href', msg.url);
     li.append(a);
     jQuery('#mensajes').append(li);

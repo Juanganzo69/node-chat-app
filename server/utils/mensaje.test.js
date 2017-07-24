@@ -18,7 +18,7 @@ describe('generarLocationMensaje', () => {
         var from = 'Juan';
         var latitud = '20.971752199999997';
         var longitud = '-89.58031240000001';
-        var url = 'https://www.google.com.mx/maps?=20.971752199999997,-89.58031240000001';
+        var url = 'https://www.google.com.mx/maps?q=20.971752199999997,-89.58031240000001';
 
         var locMensaje = generarLocationMensaje(from, latitud, longitud);
         expect(locMensaje).toExist();

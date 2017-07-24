@@ -1,7 +1,15 @@
 var socket = io();
 
 socket.on('connect', function () {
-    console.log('conectado con el servidor');
+    var params = jQuery.deparam(window.location.search);
+    socket.emit('join',params ,function(err){
+            if(err){
+                alert(err);
+                window.location.href = '/';
+            }else{
+                console.log('No hay errores');
+            }
+    });
 
 });
 
@@ -24,6 +32,16 @@ function scrollToBottom(){
     }
 
 }
+
+socket.on('updateUserList', function(users){
+    var ol = jQuery('<ol></ol>');
+
+    users.forEach( function(user){
+        ol.append(jQuery('<li></li>').text(user));
+    });
+
+    jQuery('#users').html(ol);
+});
 
 socket.on('newMensaje', function (newMsg) {
     var formatoTiempo = moment(newMsg.creadoEl).format('h:mm a');    

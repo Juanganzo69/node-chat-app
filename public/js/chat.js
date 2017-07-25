@@ -4,10 +4,22 @@ socket.on('connect', function () {
     var params = jQuery.deparam(window.location.search);
     socket.emit('join',params ,function(err){
             if(err){
-                alert(err);
-                window.location.href = '/';
+                jQuery('#myModal').modal('show');
+                $('#myModal').on('shown.bs.modal', function () {
+                    var template = jQuery('#modalError').html();
+
+                    var html = Mustache.render(template,{
+                        error: err
+                    });
+                    jQuery('#textError').append(html);
+                });
+                $('#myModal').on('hidden.bs.modal', function (e) {
+                    window.location.href = '/';
+                });
+                
             }else{
                 console.log('No hay errores');
+                socket.emit('roomie', params, function(){});
             }
     });
 
@@ -16,6 +28,8 @@ socket.on('connect', function () {
 socket.on('disconnect', function () {
     console.log('servidor desconectado');
 });
+
+
 
 function scrollToBottom(){
     var mensajes = jQuery('#mensajes');
@@ -55,12 +69,6 @@ socket.on('newMensaje', function (newMsg) {
 
     jQuery('#mensajes').append(html);
     scrollToBottom();
-
-    // var formatoTiempo = moment(newMsg.creadoEl).format('h:mm a');
-
-    // var li = jQuery('<li></li>');
-    // li.text(newMsg.from + ' ' + formatoTiempo + ' : ' + newMsg.texto);
-    // jQuery('#mensajes').append(li);
 });
 
 socket.on('newLocationMensaje', function (msg) {
@@ -74,13 +82,6 @@ socket.on('newLocationMensaje', function (msg) {
 
     jQuery('#mensajes').append(html);
     scrollToBottom();
-    
-    // var li = jQuery('<li></li>');
-    // var a = jQuery('<a target="_blank">My localización actual</a>');
-    // li.text(msg.from +' '+ formatTime + ' : ');
-    // a.attr('href', msg.url);
-    // li.append(a);
-    // jQuery('#mensajes').append(li);
 
 });
 

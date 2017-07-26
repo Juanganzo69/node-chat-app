@@ -5,42 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Join | Chat</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/styles.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->
+    <!-- <link rel="stylesheet" href="/css/styles.css"> -->
+    <link rel="stylesheet" href="/css/libs/normalize.css">
+    <link rel="stylesheet" href="/css/libs/Grid.css">
+    <link rel="stylesheet" href="/css/libs/ionicons.min.css">
+    <link rel="stylesheet" href="/css/mystyles.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet">
 </head>
-<body class="centered-form">
-    <div class="centered-form__form">
-        <form action="/chat.html">
-            <div class="form-field">
-                <h3>Unirse a un chat</h3>
+<body>
+    <header>
+        
+    </header>
+    <section class="row">
+        <div class="text-chat">
+            <h1>Chat ITM</h1>  
+        </div>
+    </section>
+    <section class="row section-room">
+        <div>
+            <h4>Lista de chats activos</h4>
+            <div id="listRooms" class="col span-of-2 room">
+
             </div>
-            <div class="form-field">
-                <label>Mostrar nombre</label>
+        </div>
+         
+        <form action="/chat.html" class="col span-of-2 form-chat">
+            <div>
+                <h3>Iniciar sesión en un chat</h3>
+            </div>
+            <div>
+                <label>Nombre de usuario</label><br>
                 <input type="text" name="name" autofocus>
             </div>
-            <div class="form-field">
-                <label>Room name</label>
+            <div>
+                <label>Nombre del Room</label><br>
                 <input type="text" name="room">
             </div>
-            <div class="form-field">
+            <div>
                 <button>Join</button>
             </div>
-            <!-- <div class="form-field">
-                <button type="button" id="refresh">Refrescar</button>
-            </div> -->
         </form>
-    </div>
-    <div class="centered-form__form down">
-        <div class="form-field" id="listRooms">
-            
-        </div>
-    </div>
-    <!-- <script id="rooms" type="text/template">
-        {{ rooms }}
-    </script> -->
+       
+    </section>
 </body>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/libs/mustache.js"></script>

@@ -75,8 +75,6 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('usuario desconectado');
         var user = users.removeUser(socket.id);
-                
-        
 
         if( user ){
             var sizeRoom = users.getUserList(user.room);
